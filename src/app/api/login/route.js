@@ -177,7 +177,7 @@ export async function POST(req) {
     console.log('cursados_res', cursados_res);
 
     // Responder con el resultado
-    return new Response(JSON.stringify(plan_res), { status: 200 });
+    return new Response(JSON.stringify(cursados_res), { status: 200 });
   } catch (error) {
     console.error('Error:', error);
     return new Response(JSON.stringify({ error: error.message }), {
