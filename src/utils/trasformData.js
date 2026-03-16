@@ -6,19 +6,35 @@ export function transformData(data) {
   let courseNode = {};
   let courseEdge = {};
 
-  data.forEach((course) => {
+  const plan = data.plan.data;
+  const historial = data.cursados.data.historial;
+
+  const cursadosMap = new Map(
+    historial
+      .filter(c => c.calificacion >= 11)
+      .map(c => [c.codAsignatura.trim(), c])
+  );
+
+  plan.forEach((course) => {
     // ignorar los cursos no obligatorios
     if (course.tipoAsignatura === 'E') return;
+
+    const cod = course.codAsignatura.trim();
 
     // añadir los demas nodos de cursos
     const nodeExist = nodeIds.some((nodeId) => nodeId === course.codAsignatura);
 
     if (!nodeExist) {
+
+      const cursoCursado = cursadosMap.get(cod);
+
       courseNode = {
-        id: course.codAsignatura,
+        id: cod,
         data: { label: course.desAsignatura },
         ciclo: course.ciclo,
         creditos: course.creditos,
+        cursado: cursoCursado ? "Aprobado" : "No aprobado",
+        nota: cursoCursado?.calificacion ?? "-"
       };
 
       nodes.push(courseNode);

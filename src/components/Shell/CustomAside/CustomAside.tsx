@@ -29,6 +29,13 @@ export default function Aside() {
                   </>
                 ) : null}
               </Text>
+              <Text>
+                <strong>Estado:</strong> {selectedNodeData.cursado}
+              </Text>
+
+              <Text>
+                <strong>Nota:</strong> {selectedNodeData.nota}
+              </Text>
             </>
           ) : null}
         </>
