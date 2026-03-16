@@ -33,7 +33,7 @@ export default function Aside() {
           ) : null}
         </>
       ) : (
-        <Text>No hay datos seleccionados</Text>
+        <Text>No hay datos seleccionados. Selecciona un curso para ver sus detalles.</Text>
       )}
     </Stack>
   );
