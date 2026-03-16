@@ -34,7 +34,10 @@ export function transformData(data) {
         ciclo: course.ciclo,
         creditos: course.creditos,
         cursado: cursoCursado ? "Aprobado" : "No aprobado",
-        nota: cursoCursado?.calificacion ?? "-"
+        nota: cursoCursado?.calificacion ?? "-",
+        className: cursoCursado
+          ? 'node-base node-aprobado'
+          : 'node-base node-standard',
       };
 
       nodes.push(courseNode);
@@ -75,7 +78,7 @@ export function transformData(data) {
       sourcePosition: 'right',
       targetPosition: 'left',
       position: { x: xPos, y: yPos },
-      className: 'node-base node-standard',
+      // className: 'node-base node-standard',
     };
   });
 

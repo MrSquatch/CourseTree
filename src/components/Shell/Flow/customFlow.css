@@ -17,3 +17,9 @@
   border-color: #555;
   color: white;
 }
+
+.node-aprobado {
+  background: #0f172a;
+  border-color: #3b82f6;
+  color: #bfdbfe;
+}
