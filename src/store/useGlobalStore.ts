@@ -152,7 +152,7 @@ export const useGlobalStore = create<GlobalStore>()(
             const newEdge = { ...edge, style: { ...edge.style } };
 
             if (selectedNode === null) {
-              newEdge.hidden = false;
+              newEdge.hidden = true;
             } else if (markedEdgesTarget.includes(edge.id)) {
               newEdge.hidden = false;
             } else if (markedEdgesSource.includes(edge.source)) {

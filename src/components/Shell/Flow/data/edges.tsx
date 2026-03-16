@@ -405,7 +405,7 @@ initialEdges = initialEdges.map((edge) => {
   return {
     ...edge,
     type: 'smart',
-    hidden: true,
+    hidden: false,
     style: { stroke: color, strokeWidth: 2 },
   };
 });
