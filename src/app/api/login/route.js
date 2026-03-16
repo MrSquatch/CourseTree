@@ -120,6 +120,39 @@ async function obtenerPlan() {
   }
 }
 
+async function obtenerCursados() {
+  const planUrl =
+    'https://sum.unmsm.edu.pe/alumnoWebSum/v2/informacion/historial?accion=obtenerHistorialAcademico';
+  const planHeaders = {
+    'User-Agent':
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0',
+  };
+
+  try {
+    const response = await fetchWithCookies(planUrl, {
+      method: 'GET',
+      headers: planHeaders,
+    });
+
+    if (response.ok) {
+      const dataText = await response.text();
+      const data = JSON.parse(dataText);
+      return data;
+    } else {
+      console.error(
+        'Error en la solicitud. Código de estado:',
+        response.status
+      );
+      return {
+        error: `Error en la solicitud. Código de estado: ${response.status}`,
+      };
+    }
+  } catch (error) {
+    console.error('Error al hacer la solicitud:', error);
+    throw error;
+  }
+}
+
 // La función exportada, adaptada al formato de Next.js
 export async function POST(req) {
   try {
@@ -138,6 +171,10 @@ export async function POST(req) {
     // Lógica de inicio de sesión y obtención del plan
     const login_res = await login(user, pass);
     const plan_res = await obtenerPlan();
+
+    const cursados_res = await obtenerCursados();
+
+    console.log('cursados_res', cursados_res);
 
     // Responder con el resultado
     return new Response(JSON.stringify(plan_res), { status: 200 });
